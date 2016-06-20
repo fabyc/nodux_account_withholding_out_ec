@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+
+        <!--action-->
+        <record model="ir.ui.view" id="out_withholding_start_view_form">
+            <field name="model">nodux_account_withholding_ec.out_withholding.start</field>
+            <field name="type">form</field>
+            <field name="name">out_withholding_start_form</field>
+        </record>
+        <record model="ir.action.wizard" id="out_withholding">
+            <field name="name">Comprobante de Retencion Cliente</field>
+            <field name="wiz_name">nodux_account_withholding_ec.out_withholding</field>
+            <field name="model">account.invoice</field>
+        </record>
+        <record model="ir.action.keyword" id="out_withholding_keyword">
+            <field name="keyword">form_action</field>
+            <field name="model">account.invoice,-1</field>
+            <field name="action" ref="out_withholding"/>
+        </record>
+
+    </data>
+</tryton>

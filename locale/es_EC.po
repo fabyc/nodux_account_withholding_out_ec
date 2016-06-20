@@ -1,0 +1,658 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "error:account.withholding.tax:"
+msgid ""
+"You can not add line \"%(line)s\" to withholding \"%(withholding)s\" because"
+" it is posted, paid or canceled."
+msgstr ""
+"No puede añadir la línea \"%(line)s\" a la retención \"%(withholding)s\" "
+"porque está contabilizada, pagada o cancelada."
+
+msgctxt "error:account.withholding.tax:"
+msgid ""
+"You can not create withholding \"%(withholding)s\" on company "
+"\"%(withholding_company)s\" using account \"%(account)s\" from company "
+"\"%(account_company)s\"."
+msgstr ""
+"No puede crear la retención \\\"%(withhlding)s\\\" en la empresa "
+"\\\"%(withholding_company)s\\\" utilizando la cuenta \\\"%(account)s\\\" de "
+"la empresa \\\"%(account_company)s\\\"."
+
+msgctxt "error:account.withholding.tax:"
+msgid ""
+"You can not create withholding \"%(withholding)s\" on company "
+"\"%(withholding_company)s\" using base tax code \"%(base_code)s\" from "
+"company \"%(base_code_company)s\"."
+msgstr ""
+"No puede crear la retención \"%(withholding)s\" de la empresa "
+"\"%(withholding_company)s\" utilizando el código de impuesto base "
+"\"%(base_code)s\" de la empresa \"%(base_code_company)s\"."
+
+msgctxt "error:account.withholding.tax:"
+msgid ""
+"You can not create withholding \"%(withholding)s\" on company "
+"\"%(withholding_company)s\" using tax code \"%(tax_code)s\" from company "
+"\"%(tax_code_company)s\"."
+msgstr ""
+"No puede crear la retención \"%(withholding)s\" de la empresa "
+"\"%(withholding_company)s\" utilizando el código de impuesto "
+"\"%(tax_code)s\" de la empresa \"%(tax_code_company)s\"."
+
+msgctxt "error:account.withholding.tax:"
+msgid ""
+"You can not modify tax \"%(tax)s\" from withholding \"%(withholding)s\" "
+"because it is posted or paid."
+msgstr ""
+"No puede modificar el impuesto \"%(tax)s\" de la retención "
+"\"%(withholding)s\" porque está contabilizada o pagada."
+
+msgctxt "error:account.withholding:"
+msgid ""
+"There is no withholding sequence for withholding \"%(withholding)s\" on the "
+"period/fiscal year \"%(period)s\"."
+msgstr ""
+"No hay secuencia de retención para la retención \"%(withholding)s\" en el "
+"período/año fiscal \"%(period)s\"."
+
+msgctxt "error:account.withholding:"
+msgid "You can not delete a withholding that is posted!"
+msgstr "¡No puede eliminar una retención ya confirmada!"
+
+msgctxt "field:account.configuration,default_account_withholding:"
+msgid "Default Account Withholding"
+msgstr "Cuenta por defecto para la retención de cliente"
+
+msgctxt "field:account.fiscalyear,in_withholding_sequence:"
+msgid "Supplier Withholding Sequence"
+msgstr "Secuencia de retención a proveedor"
+
+msgctxt "field:account.fiscalyear,out_withholding_sequence:"
+msgid "Customer Withholding Sequence"
+msgstr "Secuencia de retención de cliente"
+
+msgctxt "field:account.invoice,number_w:"
+msgid "Number"
+msgstr "Número"
+
+msgctxt "field:account.invoice,ref_withholding:"
+msgid "Withholding"
+msgstr "Retención"
+
+msgctxt "field:account.period,in_withholding_sequence:"
+msgid "Supplier Withholding Sequence"
+msgstr "Secuencia de retención a proveedor"
+
+msgctxt "field:account.period,out_withholding_sequence:"
+msgid "Customer Withholding Sequence"
+msgstr "Secuencia de retención de cliente"
+
+msgctxt "field:account.withholding,account:"
+msgid "Account"
+msgstr "Financiero"
+
+msgctxt "field:account.withholding,accounting_date:"
+msgid "Accounting Date"
+msgstr "Fecha de contabilización"
+
+msgctxt "field:account.withholding,base_imponible:"
+msgid "Valor Base imponible"
+msgstr ""
+
+msgctxt "field:account.withholding,comment:"
+msgid "Comment"
+msgstr "Comentario"
+
+msgctxt "field:account.withholding,company:"
+msgid "Company"
+msgstr "Empresa"
+
+msgctxt "field:account.withholding,create_date:"
+msgid "Create Date"
+msgstr "Fecha de Creación"
+
+msgctxt "field:account.withholding,create_uid:"
+msgid "Create User"
+msgstr "Usuario creación"
+
+msgctxt "field:account.withholding,currency:"
+msgid "Currency"
+msgstr "Moneda"
+
+msgctxt "field:account.withholding,currency_date:"
+msgid "Currency Date"
+msgstr "Fecha de moneda"
+
+msgctxt "field:account.withholding,currency_digits:"
+msgid "Currency Digits"
+msgstr "Decimales de Moneda"
+
+msgctxt "field:account.withholding,description:"
+msgid "Description"
+msgstr "Descripción"
+
+msgctxt "field:account.withholding,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:account.withholding,iva:"
+msgid "Valor Impuesto"
+msgstr ""
+
+msgctxt "field:account.withholding,journal:"
+msgid "Journal"
+msgstr "Libro Diario"
+
+msgctxt "field:account.withholding,move:"
+msgid "Move"
+msgstr "Movimiento"
+
+msgctxt "field:account.withholding,number:"
+msgid "Number"
+msgstr "Número"
+
+msgctxt "field:account.withholding,number_w:"
+msgid "Invoice number"
+msgstr "Número de factura"
+
+msgctxt "field:account.withholding,party:"
+msgid "Party"
+msgstr "Tercero"
+
+msgctxt "field:account.withholding,party_lang:"
+msgid "Party Language"
+msgstr "Idioma del Tercero"
+
+msgctxt "field:account.withholding,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:account.withholding,reference:"
+msgid "Reference"
+msgstr "Referencia"
+
+msgctxt "field:account.withholding,state:"
+msgid "State"
+msgstr "Estado"
+
+msgctxt "field:account.withholding,tax_amount:"
+msgid "Tax"
+msgstr "Impuesto"
+
+msgctxt "field:account.withholding,taxes:"
+msgid "Tax Lines"
+msgstr "Líneas de impuestos"
+
+msgctxt "field:account.withholding,total_amount:"
+msgid "Total withholding"
+msgstr "Total retención"
+
+msgctxt "field:account.withholding,type:"
+msgid "Type"
+msgstr "Tipo"
+
+msgctxt "field:account.withholding,untaxed_amount:"
+msgid "Untaxed"
+msgstr "Base (sin impuestos)"
+
+msgctxt "field:account.withholding,withholding_address:"
+msgid "Withholding Address"
+msgstr "Dirección de retención"
+
+msgctxt "field:account.withholding,withholding_date:"
+msgid "Withholding Date"
+msgstr "Fecha de retención"
+
+msgctxt "field:account.withholding,write_date:"
+msgid "Write Date"
+msgstr "Modificado por usuario"
+
+msgctxt "field:account.withholding,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "field:account.withholding.tax,account:"
+msgid "Account"
+msgstr "Cuenta"
+
+msgctxt "field:account.withholding.tax,amount:"
+msgid "Amount"
+msgstr "Valor"
+
+msgctxt "field:account.withholding.tax,base:"
+msgid "Base"
+msgstr "Base"
+
+msgctxt "field:account.withholding.tax,base_code:"
+msgid "Base Code"
+msgstr "Código de la base"
+
+msgctxt "field:account.withholding.tax,base_sign:"
+msgid "Base Sign"
+msgstr "Signo de la base"
+
+msgctxt "field:account.withholding.tax,create_date:"
+msgid "Create Date"
+msgstr "Fecha de Creación"
+
+msgctxt "field:account.withholding.tax,create_uid:"
+msgid "Create User"
+msgstr "Usuario creación"
+
+msgctxt "field:account.withholding.tax,description:"
+msgid "Description"
+msgstr "Descripción"
+
+msgctxt "field:account.withholding.tax,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:account.withholding.tax,manual:"
+msgid "Manual"
+msgstr "Manual"
+
+msgctxt "field:account.withholding.tax,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:account.withholding.tax,sequence:"
+msgid "Sequence"
+msgstr "Secuencia"
+
+msgctxt "field:account.withholding.tax,sequence_number:"
+msgid "Sequence Number"
+msgstr "Número de secuencia"
+
+msgctxt "field:account.withholding.tax,tax:"
+msgid "Tax"
+msgstr "Impuesto"
+
+msgctxt "field:account.withholding.tax,tax_code:"
+msgid "Tax Code"
+msgstr "Código de impuesto"
+
+msgctxt "field:account.withholding.tax,tax_sign:"
+msgid "Tax Sign"
+msgstr "Signo del impuesto"
+
+msgctxt "field:account.withholding.tax,tipo:"
+msgid "Tipo de retencion"
+msgstr ""
+
+msgctxt "field:account.withholding.tax,withholding:"
+msgid "withholding"
+msgstr "Retenciones"
+
+msgctxt "field:account.withholding.tax,write_date:"
+msgid "Write Date"
+msgstr "Modificado por usuario"
+
+msgctxt "field:account.withholding.tax,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "field:nodux_account_withholding_ec.out_withholding.start,id:"
+msgid "ID"
+msgstr "ID"
+
+msgctxt "field:party.party,aplica_retencion:"
+msgid "Aplica Retencion"
+msgstr ""
+
+msgctxt "field:party.party,impuesto_iva:"
+msgid "IVA"
+msgstr "Impuesto IVA ATS"
+
+msgctxt "field:party.party,impuestos_renta:"
+msgid "FUENTE"
+msgstr "Impuesto Renta ATS"
+
+msgctxt "model:account.withholding,name:"
+msgid "Account Withholding"
+msgstr "Retenciones"
+
+msgctxt "model:account.withholding.tax,name:"
+msgid "Account Withholding Tax"
+msgstr "Impuestos de retención"
+
+msgctxt "model:ir.action,name:"
+msgid "Reporte de Retenciones"
+msgstr ""
+
+msgctxt "model:ir.action,name:act_withholding_form"
+msgid "Withholdings"
+msgstr "Retenciones"
+
+msgctxt "model:ir.action,name:act_withholding_out_withholding_form"
+msgid "Customer Withholdings"
+msgstr "Retenciones de cliente"
+
+msgctxt "model:ir.action,name:out_withholding"
+msgid "Comprobante de Retencion Cliente"
+msgstr "Comp. de retención de cliente"
+
+msgctxt "model:ir.action.act_window.domain,name:"
+msgid "All"
+msgstr "Todo"
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_withholding_out_withholding_domain_all"
+msgid "All"
+msgstr "Todo"
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_withholding_out_withholding_domain_draft"
+msgid "Draft"
+msgstr "Borrador"
+
+msgctxt ""
+"model:ir.action.act_window.domain,name:act_withholding_out_withholding_domain_posted"
+msgid "Posted"
+msgstr "Contabilizado"
+
+msgctxt "model:ir.ui.menu,name:"
+msgid "Generar Anticipo"
+msgstr "Comprobantes de Retención de Clientes"
+
+msgctxt "model:ir.ui.menu,name:menu_withholding_out_withholding_form"
+msgid "Customer Withholdings"
+msgstr "Retenciones de cliente"
+
+msgctxt "model:ir.ui.menu,name:menu_withholdings"
+msgid "Withholdings"
+msgstr "Retenciones"
+
+msgctxt "model:nodux_account_withholding_ec.out_withholding.start,name:"
+msgid "Withholding Out Start"
+msgstr "Retención a proveedor - Iniciar"
+
+msgctxt "odt:account.invoice.print_move:"
+msgid ","
+msgstr ","
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "-"
+msgstr "-"
+
+msgctxt "odt:account.invoice.print_move:"
+msgid ":"
+msgstr ":"
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "Analista Contable"
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "Asiento No."
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "Beneficiario"
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "Compra No."
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "Crédito"
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "Cuenta"
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "Código"
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "Doc."
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "Débito"
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "Elaborado por:"
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "F.P"
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "GENERAL"
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "Lugar y Fecha:"
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "No. Doc."
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "Nota:"
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "RETENCIÓN"
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "Referencia"
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "Totales $"
+msgstr ""
+
+msgctxt "odt:account.invoice.print_move:"
+msgid "de"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid ":"
+msgstr ":"
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "Base imponible"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "C.I/RUC:"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "COMPROBANTE DE RETENCIÓN"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "Comprobante"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "Direcció"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "Dirección"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "Ejercicio Fiscal"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "Email:"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "FACTURA"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "Fecha de Emisión"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "Fecha emisión"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "Guía de remision:"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "I"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "IVA"
+msgstr "Impuesto IVA ATS"
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "Impuesto"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "N"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "NFORMACIÓN ADICIONAL"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "N°:"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "Porcentaje Retención"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "RENTA"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "RUC"
+msgstr "RUC"
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "Razón social/Nombre y Apellidos:"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "Retención"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "Valor Retenido"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "matriz"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "mero"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "n"
+msgstr ""
+
+msgctxt "odt:account.withholding.print_withholding:"
+msgid "ú"
+msgstr ""
+
+msgctxt "selection:account.withholding,state:"
+msgid "Confirm"
+msgstr "Confirmar"
+
+msgctxt "selection:account.withholding,state:"
+msgid "Draft"
+msgstr "Borrador"
+
+msgctxt "selection:account.withholding,state:"
+msgid "Posted"
+msgstr "Contabilizado"
+
+msgctxt "selection:account.withholding,type:"
+msgid "Customer withholding"
+msgstr "Retención de cliente"
+
+msgctxt "selection:account.withholding,type:"
+msgid "Supplier withholding"
+msgstr "Retención a proveedor"
+
+msgctxt "view:account.withholding.tax:"
+msgid "Tax Code"
+msgstr "Código de impuesto"
+
+msgctxt "view:account.withholding.tax:"
+msgid "Taxes"
+msgstr "Impuestos"
+
+msgctxt "view:account.withholding.tax:"
+msgid "Withholding Tax"
+msgstr "Impuestos retención"
+
+msgctxt "view:account.withholding.tax:"
+msgid "Withholding Taxes"
+msgstr "Impuestos de la retención"
+
+msgctxt "view:account.withholding:"
+msgid "Other Info"
+msgstr "Información Adicional"
+
+msgctxt "view:account.withholding:"
+msgid "Withholding"
+msgstr "Retención"
+
+msgctxt "view:account.withholding:"
+msgid "_Confirm"
+msgstr "Confirmar"
+
+msgctxt "view:account.withholding:"
+msgid "_Post"
+msgstr "_Contabilizar"
+
+msgctxt "view:account.withholding:"
+msgid "withholdings"
+msgstr "Retenciones"
+
+msgctxt "view:nodux_account_withholding_ec.out_withholding.start:"
+msgid "COMPROBANTE DE RETENCION CLIENTE"
+msgstr "COMPROBANTE DE RETENCION DE CLIENTE"
+
+msgctxt "view:nodux_account_withholding_ec.out_withholding.start:"
+msgid "Esta seguro de generar un COMPROBANTE DE RETENCION"
+msgstr ""
+
+msgctxt "view:party.party:"
+msgid "Impuestos retencion"
+msgstr ""
+
+msgctxt "view:party.party:"
+msgid "Retencion"
+msgstr ""
+
+msgctxt "wizard_button:account.invoice.validate_invoice,start,end:"
+msgid "Cerrar"
+msgstr ""
+
+msgctxt ""
+"wizard_button:nodux_account_withholding_ec.out_withholding,start,end:"
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgctxt ""
+"wizard_button:nodux_account_withholding_ec.out_withholding,start,withholdingOut:"
+msgid "Withholding"
+msgstr "Retención"
