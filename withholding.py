@@ -119,6 +119,11 @@ class AccountWithholding(ModelSQL, ModelView):
 
     total_retencion = fields.Numeric(u'Total withholding')
 
+    ref_invoice = fields.Many2One('account.invoice', 'Invoice', readonly=True)
+
+    total_amount2 = fields.Numeric('Total withholding', digits=(16,
+                Eval('currency_digits', 2)), depends=['currency_digits'])
+
     @classmethod
     def __setup__(cls):
         super(AccountWithholding, cls).__setup__()
@@ -457,7 +462,9 @@ class AccountWithholding(ModelSQL, ModelView):
                     invoice = i
                 withholding.set_number()
                 invoice.write([invoice],{ 'ref_withholding': withholding.number})
+            withholding.write([withholding],{'total_amount2':(withholding.total_amount*-1)})
         cls.write(withholdings, {'state': 'validated'})
+
     @classmethod
     @ModelView.button
     def post(cls, withholdings):
@@ -466,7 +473,6 @@ class AccountWithholding(ModelSQL, ModelView):
             move_lines = withholding.prepare_withholding_lines()
             withholding.posted(move_lines)
         cls.write(withholdings, {'state': 'posted'})
-
 
 class AccountWithholdingTax(ModelSQL, ModelView):
     'Account Withholding Tax'
