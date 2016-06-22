@@ -115,13 +115,16 @@ class AccountWithholding(ModelSQL, ModelView):
 
     iva = fields.Numeric(u'Valor Impuesto', states=_STATES)
 
-    number_w = fields.Char('Invoice number', size=20, select=True)
+    number_w = fields.Char('Invoice number', size=17, states={
+        'required': ((Eval('type') == 'in_withholding')),
+        'readonly': Eval('state') != 'draft',
+        },help="Numero factura ejemplo:001-001-000000001", select=True)
 
     total_retencion = fields.Numeric(u'Total withholding')
 
     ref_invoice = fields.Many2One('account.invoice', 'Invoice', readonly=True)
 
-    total_amount2 = fields.Numeric('Total withholding', digits=(16,
+    total_amount2 = fields.Numeric('Total withholding', states=_STATES, digits=(16,
                 Eval('currency_digits', 2)), depends=['currency_digits'])
 
     @classmethod
@@ -158,6 +161,20 @@ class AccountWithholding(ModelSQL, ModelView):
         if self.currency:
             return self.currency.digits
         return 2
+
+    @fields.depends('type', 'number_w')
+    def on_change_number_w(self):
+        result = {}
+        numero = None
+        if self.type == 'in_withholding':
+            number = (self.number_w).replace('-','')
+            if len(number) == 15:
+                pass
+            else:
+                result['number_w'] = numero
+        else:
+            result['number_w'] = self.number_w
+        return result
 
     @fields.depends('party')
     def on_change_with_party_lang(self, name=None):
