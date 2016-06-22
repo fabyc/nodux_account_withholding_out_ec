@@ -168,6 +168,10 @@ msgctxt "field:account.withholding,rec_name:"
 msgid "Name"
 msgstr "Nombre"
 
+msgctxt "field:account.withholding,ref_invoice:"
+msgid "Invoice"
+msgstr "Factura"
+
 msgctxt "field:account.withholding,reference:"
 msgid "Reference"
 msgstr "Referencia"
@@ -184,7 +188,15 @@ msgctxt "field:account.withholding,taxes:"
 msgid "Tax Lines"
 msgstr "Líneas de impuestos"
 
+msgctxt "field:account.withholding,total_amount2:"
+msgid "Total withholding"
+msgstr "Total retención"
+
 msgctxt "field:account.withholding,total_amount:"
+msgid "Total withholding"
+msgstr "Total retención"
+
+msgctxt "field:account.withholding,total_retencion:"
 msgid "Total withholding"
 msgstr "Total retención"
 
@@ -278,7 +290,7 @@ msgstr "Signo del impuesto"
 
 msgctxt "field:account.withholding.tax,tipo:"
 msgid "Tipo de retencion"
-msgstr ""
+msgstr "Tipo de retención"
 
 msgctxt "field:account.withholding.tax,withholding:"
 msgid "withholding"
@@ -493,7 +505,7 @@ msgstr ""
 
 msgctxt "odt:account.withholding.print_withholding:"
 msgid "FACTURA"
-msgstr ""
+msgstr "FACTURA"
 
 msgctxt "odt:account.withholding.print_withholding:"
 msgid "Fecha de Emisión"
@@ -573,7 +585,7 @@ msgstr ""
 
 msgctxt "selection:account.withholding,state:"
 msgid "Confirm"
-msgstr "Confirmar"
+msgstr "Confirmado"
 
 msgctxt "selection:account.withholding,state:"
 msgid "Draft"
@@ -617,7 +629,7 @@ msgstr "Retención"
 
 msgctxt "view:account.withholding:"
 msgid "_Confirm"
-msgstr "Confirmar"
+msgstr "_Confirmar"
 
 msgctxt "view:account.withholding:"
 msgid "_Post"
@@ -637,11 +649,11 @@ msgstr ""
 
 msgctxt "view:party.party:"
 msgid "Impuestos retencion"
-msgstr ""
+msgstr "Impuestos retención"
 
 msgctxt "view:party.party:"
 msgid "Retencion"
-msgstr ""
+msgstr "Retención"
 
 msgctxt "wizard_button:account.invoice.validate_invoice,start,end:"
 msgid "Cerrar"
