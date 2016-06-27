@@ -90,11 +90,11 @@ msgstr "Secuencia de retención de cliente"
 
 msgctxt "field:account.withholding,account:"
 msgid "Account"
-msgstr "Financiero"
+msgstr "Cuenta"
 
 msgctxt "field:account.withholding,accounting_date:"
 msgid "Accounting Date"
-msgstr "Fecha de contabilización"
+msgstr "Fecha efectiva de asiento"
 
 msgctxt "field:account.withholding,base_imponible:"
 msgid "Valor Base imponible"
@@ -319,6 +319,10 @@ msgstr "Impuesto IVA ATS"
 msgctxt "field:party.party,impuestos_renta:"
 msgid "FUENTE"
 msgstr "Impuesto Renta ATS"
+
+msgctxt "help:account.withholding,number_w:"
+msgid "Numero factura ejemplo:001-001-000000001"
+msgstr ""
 
 msgctxt "model:account.withholding,name:"
 msgid "Account Withholding"
