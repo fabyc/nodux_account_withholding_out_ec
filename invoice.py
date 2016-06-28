@@ -17,11 +17,10 @@ from trytond.transaction import Transaction
 from trytond.pool import Pool
 
 __all__ = ['Invoice','ValidatedInvoice','WithholdingOutStart','WithholdingOut']
-__metaclass__ = PoolMeta
 #customer->cliente
 
 class Invoice():
-    'Invoice'
+    __metaclass__ = PoolMeta
     __name__ = 'account.invoice'
 
     @classmethod

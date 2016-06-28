@@ -6,20 +6,22 @@ this repository contains the full copyright notices and license terms. -->
 
         <record model="ir.ui.view" id="fiscalyear_view_form">
             <field name="model">account.fiscalyear</field>
+            <field name="type" Eval="None"/>
             <field name="inherit" ref="account.fiscalyear_view_form"/>
             <field name="name">fiscalyear_form</field>
         </record>
 
         <record model="ir.ui.view" id="period_view_form">
             <field name="model">account.period</field>
+            <field name="type" Eval="None"/>
             <field name="inherit" ref="account.period_view_form"/>
             <field name="name">period_form</field>
         </record>
 
         <record model="ir.ui.view" id="configuration_view_form">
             <field name="model">account.configuration</field>
+            <field name="model" Eval="None"/>
             <field name="inherit" ref="account.configuration_view_form"/>
-            <field name="type">form</field>
             <field name="name">configuration_form</field>
         </record>
 

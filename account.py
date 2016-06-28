@@ -6,16 +6,15 @@ from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 
 __all__ = ['FiscalYear', 'Period', 'Configuration']
-__metaclass__ = PoolMeta
-
 
 class Configuration:
-    'Account Configuration'
+    __metaclass__ = PoolMeta
     __name__ = 'account.configuration'
 
     default_account_withholding = fields.Many2One('account.account', 'Default Account Withholding')
 
 class FiscalYear:
+    __metaclass__ = PoolMeta
     __name__ = 'account.fiscalyear'
 
     out_withholding_sequence = fields.Many2One('ir.sequence.strict',
@@ -76,6 +75,7 @@ class FiscalYear:
         super(FiscalYear, cls).write(*args)
 
 class Period:
+    __metaclass__ = PoolMeta
     __name__ = 'account.period'
 
     out_withholding_sequence = fields.Many2One('ir.sequence.strict',
