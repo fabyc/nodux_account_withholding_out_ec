@@ -425,9 +425,9 @@ class AccountWithholding(ModelSQL, ModelView):
 
         res = {}
 
-        if invoice.type == 'out_invoice':
+        if invoice.type == 'out':
             res['type'] = 'out_withholding'
-        if invoice.type == 'in_invoice':
+        if invoice.type == 'in':
             res['type'] = 'in_withholding'
 
         res['base_imponible'] = invoice.taxes[0].base
@@ -554,8 +554,7 @@ class AccountWithholdingTax(ModelSQL, ModelView):
     @classmethod
     def __register__(cls, module_name):
         TableHandler = backend.get('TableHandler')
-        cursor = Transaction().cursor
-        table = TableHandler(cursor, cls, module_name)
+        table = TableHandler(cls, module_name)
 
         super(AccountWithholdingTax, cls).__register__(module_name)
 

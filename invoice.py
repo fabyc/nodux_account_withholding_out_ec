@@ -69,7 +69,7 @@ class ValidatedInvoice(Wizard):
         else:
             self.raise_user_error('No ha configurado la cuenta por defecto para la retencion. \nDirijase a Financiero-Configuracion-Configuracion Contable')
 
-        if invoice.type == 'out_invoice':
+        if invoice.type == 'out':
             default['type'] = 'out_withholding'
 
         if invoice.description:
@@ -116,7 +116,7 @@ class WithholdingOut(Wizard):
 
         invoices = Invoice.browse(Transaction().context['active_ids'])
         for invoice in invoices:
-            if invoice.type != 'out_invoice':
+            if invoice.type != 'out':
                 self.raise_user_error('No puede generar un comprobante de retencion de cliente desde Factura de Proveedor')
 
         out_withholding = Invoice.withholdingOut(invoices)

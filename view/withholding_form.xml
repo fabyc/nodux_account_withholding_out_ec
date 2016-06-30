@@ -68,8 +68,7 @@ this repository contains the full copyright notices and license terms. -->
             <label name="move"/>
             <field name="move"/>
             <separator name="comment" colspan="4"/>
-            <field name="comment" colspan="4"
-                spell="Eval('party_lang')"/>
+            <field name="comment" colspan="4"/>
         </page>
     </notebook>
     <field name="party_lang" invisible="1" colspan="6"/>
