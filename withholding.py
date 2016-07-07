@@ -170,6 +170,24 @@ class AccountWithholding(ModelSQL, ModelView):
             number = (self.number_w).replace('-','')
             if len(number) == 15:
                 pass
+            elif len(number)==1:
+                result['number_w'] = '001-001-00000000'+self.number_w
+            elif len(number)==2:
+                result['number_w'] = '001-001-0000000'+self.number_w
+            elif len(number)==3:
+                result['number_w'] = '001-001-000000'+self.number_w
+            elif len(number)==4:
+                result['number_w'] = '001-001-00000'+self.number_w
+            elif len(number)==5:
+                result['number_w'] = '001-001-0000'+self.number_w
+            elif len(number)==6:
+                result['number_w'] = '001-001-000'+self.number_w
+            elif len(number)==7:
+                result['number_w'] = '001-001-00'+self.number_w
+            elif len(number)==8:
+                result['number_w'] = '001-001-0'+self.number_w
+            elif len(number)==9:
+                result['number_w'] = '001-001-'+self.number_w
             else:
                 result['number_w'] = numero
         else:
@@ -616,14 +634,22 @@ class AccountWithholdingTax(ModelSQL, ModelView):
     @fields.depends('tax', 'base', 'amount', 'manual')
     def on_change_with_amount(self):
         Tax = Pool().get('account.tax')
+        transaction = Transaction()
+        company = transaction.context['company']
+        Company = Pool().get('company.company')
+        companies = Company.search([('id', '=', company)])
+        for c in companies:
+            company = c
         if self.tax and self.manual:
+
             tax = self.tax
             base = self.base or Decimal(0)
             for values in Tax.compute([tax], base, 1):
                 if (values['tax'] == tax
                         and values['base'] == base):
-                    return values['amount']
-        return self.amount
+                    amount = company.currency.round(values['amount'])
+                    return amount
+        return company.currency.round(self.amount)
 
     @classmethod
     def check_modify(cls, taxes):
