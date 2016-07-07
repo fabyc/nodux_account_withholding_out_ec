@@ -73,8 +73,8 @@ class ValidatedInvoice(Wizard):
         if invoice.type == 'out_invoice':
             default['type'] = 'out_withholding'
 
-        if invoice.description:
-            default['number_w'] = invoice.description
+        if invoice.reference:
+            default['number_w'] = invoice.reference
 
         default['account'] = j.id
         default['withholding_address'] = invoice.invoice_address.id
