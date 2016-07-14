@@ -56,7 +56,7 @@ class AccountWithholding(ModelSQL, ModelView):
         required=True, states={
             'readonly': ((Eval('state') != 'draft')),
             }, depends=['state'])
-    number = fields.Char('Number', size=None, readonly=True, select=True)
+    number = fields.Char('Number', size=None, select=True)
     reference = fields.Char('Reference', size=None, states=_STATES,
         depends=_DEPENDS)
     description = fields.Char('Description', size=None, states=_STATES,

@@ -72,7 +72,6 @@ class ValidatedInvoice(Wizard):
 
         if invoice.type == 'out_invoice':
             default['type'] = 'out_withholding'
-
         if invoice.reference:
             default['number_w'] = invoice.reference
 
@@ -89,7 +88,6 @@ class ValidatedInvoice(Wizard):
         default['base_imponible'] = invoice.taxes[0].base
         default['iva']= invoice.taxes[0].amount
         default['withholding_date']= fecha_actual
-        print "Default ** ", default
         return default
 
 class WithholdingOutStart(ModelView):
