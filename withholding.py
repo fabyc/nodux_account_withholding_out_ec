@@ -136,7 +136,6 @@ class AccountWithholding(ModelSQL, ModelView):
             'no_withholding_sequence': ('There is no withholding sequence for '
                 'withholding "%(withholding)s" on the period/fiscal year '
                 '"%(period)s".'),
-
         })
 
         cls._buttons.update({
@@ -150,7 +149,7 @@ class AccountWithholding(ModelSQL, ModelView):
                     #'readonly': Not(Bool(Eval('taxes'))
                     },
                 })
-        cls._order.insert(1, ('number', 'DESC'))
+        cls._order.insert(0, ('withholding_date', 'DESC'))
 
     @staticmethod
     def default_state():
