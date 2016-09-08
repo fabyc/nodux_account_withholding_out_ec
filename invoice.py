@@ -72,6 +72,8 @@ class ValidatedInvoice(Wizard):
 
         if invoice.type == 'out_invoice':
             default['type'] = 'out_withholding'
+        if invoice.type == 'in_invoice':
+            default['type'] = 'in_withholding'
         if invoice.reference:
             default['number_w'] = invoice.reference
 
