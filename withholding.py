@@ -207,6 +207,16 @@ class AccountWithholding(ModelSQL, ModelView):
             context['language'] = self.party.lang.code
         return context
 
+    @fields.depends('taxes', 'total_amount2')
+    def on_change_taxes(self):
+        amount = Decimal(0.0)
+        result = {}
+        if self.taxes:
+            for i in self.taxes:
+                amount += i.amount
+            result['total_amount2'] = amount * -1
+        return result
+
     @classmethod
     def get_amount(cls, invoices, names):
         pool = Pool()
@@ -503,6 +513,7 @@ class AccountWithholding(ModelSQL, ModelView):
     @ModelView.button
     def post(cls, withholdings):
         for withholding in withholdings:
+            withholding.write([withholding],{'total_amount2':(withholding.total_amount*-1)})
             withholding.set_number()
             move_lines = withholding.prepare_withholding_lines()
             withholding.posted(move_lines)
