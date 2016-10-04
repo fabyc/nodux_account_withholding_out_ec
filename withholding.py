@@ -127,6 +127,11 @@ class AccountWithholding(ModelSQL, ModelView):
     total_amount2 = fields.Numeric('Total withholding', states=_STATES, digits=(16,
                 Eval('currency_digits', 2)), depends=['currency_digits'])
 
+    efectivo = fields.Boolean('Efectivo', help="Retencion en efectivo", states={
+        'invisible': ((Eval('type') == 'in_withholding')),
+        'readonly': Eval('state') != 'draft',
+    })
+
     @classmethod
     def __setup__(cls):
         super(AccountWithholding, cls).__setup__()
@@ -146,7 +151,6 @@ class AccountWithholding(ModelSQL, ModelView):
                 'post': {
                     'invisible': (Eval('state') == 'posted') | (Eval('type') == 'in_withholding') ,
                     'readonly' : ~Eval('taxes', [0]),
-                    #'readonly': Not(Bool(Eval('taxes'))
                     },
                 })
         cls._order.insert(0, ('withholding_date', 'DESC'))
@@ -154,6 +158,10 @@ class AccountWithholding(ModelSQL, ModelView):
     @staticmethod
     def default_state():
         return 'draft'
+
+    @staticmethod
+    def default_efectivo():
+        return True
 
     @fields.depends('currency')
     def on_change_with_currency_digits(self, name=None):
@@ -401,15 +409,29 @@ class AccountWithholding(ModelSQL, ModelView):
         else:
             debit = self.total_amount
             credit = Decimal('0.00')
-        move_lines.append({
-            'description': self.number,
-            'debit': debit,
-            'credit': credit,
-            'account': self.account.id,
-            'move': move.id,
-            'journal': self.journal.id,
-            'period': Period.find(self.company.id, date=self.withholding_date),
-            })
+
+        if self.efectivo == True:
+            move_lines.append({
+                'description': self.number,
+                'debit': debit,
+                'credit': credit,
+                'account': self.account.id,
+                'move': move.id,
+                'journal': self.journal.id,
+                'period': Period.find(self.company.id, date=self.withholding_date),
+                })
+        else:
+            move_lines.append({
+                'description': self.number,
+                'debit': debit,
+                'credit': credit,
+                'account': self.party.account_receivable.id,
+                'party': self.party.id,
+                'move': move.id,
+                'journal': self.journal.id,
+                'period': Period.find(self.company.id, date=self.withholding_date),
+                })
+
         if self.taxes:
             for tax in self.taxes:
                 if self.type == 'out_withholding':
@@ -499,6 +521,13 @@ class AccountWithholding(ModelSQL, ModelView):
     @ModelView.button
     def validate_withholding(cls, withholdings):
         for withholding in withholdings:
+            if withholding.type == 'out_withholding':
+                if withholding.efectivo == True:
+                    withholding.raise_user_warning('confirm_%s' % withholding.id,
+                           'Esta seguro de realizar la retencion en efectivo.')
+                else:
+                    withholding.raise_user_warning('confirm_%s' % withholding.id,
+                           'Esta seguro que la retencion no es en efectivo')
             if withholding.type in ('in_withholding'):
                 Invoice = Pool().get('account.invoice')
                 invoices = Invoice.search([('number','=',withholding.reference), ('number','!=', None)])
@@ -513,6 +542,13 @@ class AccountWithholding(ModelSQL, ModelView):
     @ModelView.button
     def post(cls, withholdings):
         for withholding in withholdings:
+            if withholding.type == 'out_withholding':
+                if withholding.efectivo == True:
+                    withholding.raise_user_warning('confirm_%s' % withholding.id,
+                           'Esta seguro de realizar la retencion en efectivo.')
+                else:
+                    withholding.raise_user_warning('confirm_%s' % withholding.id,
+                           'Esta seguro que la retencion no es en efectivo')
             withholding.write([withholding],{'total_amount2':(withholding.total_amount*-1)})
             withholding.set_number()
             move_lines = withholding.prepare_withholding_lines()

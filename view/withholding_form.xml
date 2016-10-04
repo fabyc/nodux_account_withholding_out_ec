@@ -17,6 +17,9 @@ this repository contains the full copyright notices and license terms. -->
     <field name="description" colspan="3"/>
     <label name="reference"/>
     <field name="reference"/>
+    <newline/>
+    <label name="efectivo"/>
+    <field name="efectivo"/>
     <notebook colspan="6">
         <page string="Withholding" id="withholding" col="6">
             <label name="withholding_date"/>
