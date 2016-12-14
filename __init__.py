@@ -21,4 +21,3 @@ def register():
         WithholdingOut,
         ValidatedInvoice,
         module='nodux_account_withholding_out_ec', type_='wizard')
-    

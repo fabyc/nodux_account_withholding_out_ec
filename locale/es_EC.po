@@ -62,7 +62,7 @@ msgstr "¡No puede eliminar una retención ya confirmada!"
 
 msgctxt "field:account.configuration,default_account_withholding:"
 msgid "Default Account Withholding"
-msgstr "Cuenta por defecto para la retención de cliente"
+msgstr "Cuenta por defecto para la devolución de retención"
 
 msgctxt "field:account.fiscalyear,in_withholding_sequence:"
 msgid "Supplier Withholding Sequence"
@@ -131,6 +131,11 @@ msgstr "Decimales de Moneda"
 msgctxt "field:account.withholding,description:"
 msgid "Description"
 msgstr "Descripción"
+
+#, fuzzy
+msgctxt "field:account.withholding,efectivo:"
+msgid "Efectivo"
+msgstr "Efectivo"
 
 msgctxt "field:account.withholding,id:"
 msgid "ID"
@@ -319,6 +324,10 @@ msgstr "Impuesto IVA ATS"
 msgctxt "field:party.party,impuestos_renta:"
 msgid "FUENTE"
 msgstr "Impuesto Renta ATS"
+
+msgctxt "help:account.withholding,efectivo:"
+msgid "Retencion en efectivo"
+msgstr ""
 
 msgctxt "help:account.withholding,number_w:"
 msgid "Numero factura ejemplo:001-001-000000001"
