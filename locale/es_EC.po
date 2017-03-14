@@ -64,10 +64,6 @@ msgctxt "field:account.configuration,default_account_withholding:"
 msgid "Default Account Withholding"
 msgstr "Cuenta por defecto para la retención de cliente"
 
-msgctxt "field:account.fiscalyear,in_withholding_sequence:"
-msgid "Supplier Withholding Sequence"
-msgstr "Secuencia de retención a proveedor"
-
 msgctxt "field:account.fiscalyear,out_withholding_sequence:"
 msgid "Customer Withholding Sequence"
 msgstr "Secuencia de retención de cliente"
@@ -75,14 +71,6 @@ msgstr "Secuencia de retención de cliente"
 msgctxt "field:account.invoice,number_w:"
 msgid "Number"
 msgstr "Número"
-
-msgctxt "field:account.invoice,ref_withholding:"
-msgid "Withholding"
-msgstr "Retención"
-
-msgctxt "field:account.period,in_withholding_sequence:"
-msgid "Supplier Withholding Sequence"
-msgstr "Secuencia de retención a proveedor"
 
 msgctxt "field:account.period,out_withholding_sequence:"
 msgid "Customer Withholding Sequence"
@@ -131,6 +119,10 @@ msgstr "Decimales de Moneda"
 msgctxt "field:account.withholding,description:"
 msgid "Description"
 msgstr "Descripción"
+
+msgctxt "field:account.withholding,efectivo:"
+msgid "Efectivo"
+msgstr "Efectivo"
 
 msgctxt "field:account.withholding,id:"
 msgid "ID"
@@ -308,17 +300,9 @@ msgctxt "field:nodux_account_withholding_ec.out_withholding.start,id:"
 msgid "ID"
 msgstr "ID"
 
-msgctxt "field:party.party,aplica_retencion:"
-msgid "Aplica Retencion"
+msgctxt "help:account.withholding,efectivo:"
+msgid "Retencion en efectivo"
 msgstr ""
-
-msgctxt "field:party.party,impuesto_iva:"
-msgid "IVA"
-msgstr "Impuesto IVA ATS"
-
-msgctxt "field:party.party,impuestos_renta:"
-msgid "FUENTE"
-msgstr "Impuesto Renta ATS"
 
 msgctxt "help:account.withholding,number_w:"
 msgid "Numero factura ejemplo:001-001-000000001"

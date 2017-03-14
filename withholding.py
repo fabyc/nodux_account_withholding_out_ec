@@ -7,7 +7,6 @@ from trytond.model import ModelSingleton, ModelView, ModelSQL, fields, Workflow
 from trytond.transaction import Transaction
 from trytond.pyson import Eval, In, If, Bool, Id
 from trytond.pool import Pool
-from trytond.report import Report
 import pytz
 from datetime import datetime,timedelta
 import time
@@ -19,7 +18,6 @@ from trytond.tools import reduce_ids, grouped_slice
 from sql.conditionals import Coalesce, Case
 from sql.aggregate import Count, Sum
 from sql.functions import Abs, Sign
-from trytond.modules.company import CompanyReport
 
 __all__ = ['AccountWithholding', 'AccountWithholdingTax']
 
@@ -127,6 +125,11 @@ class AccountWithholding(ModelSQL, ModelView):
     total_amount2 = fields.Numeric('Total withholding', states=_STATES, digits=(16,
                 Eval('currency_digits', 2)), depends=['currency_digits'])
 
+    efectivo = fields.Boolean('Efectivo', help="Retencion en efectivo", states={
+        'invisible': ((Eval('type') == 'in_withholding')),
+        'readonly': Eval('state') != 'draft',
+    })
+
     @classmethod
     def __setup__(cls):
         super(AccountWithholding, cls).__setup__()
@@ -156,6 +159,10 @@ class AccountWithholding(ModelSQL, ModelView):
     def default_state():
         return 'draft'
 
+    @staticmethod
+    def default_efectivo():
+        return True
+
     @fields.depends('currency')
     def on_change_with_currency_digits(self, name=None):
         if self.currency:
@@ -170,11 +177,28 @@ class AccountWithholding(ModelSQL, ModelView):
             number = (self.number_w).replace('-','')
             if len(number) == 15:
                 pass
+            elif len(number)==1:
+                self.number_w = '001-001-00000000'+self.number_w
+            elif len(number)==2:
+                self.number_w = '001-001-0000000'+self.number_w
+            elif len(number)==3:
+                self.number_w = '001-001-000000'+self.number_w
+            elif len(number)==4:
+                self.number_w = '001-001-00000'+self.number_w
+            elif len(number)==5:
+                self.number_w = '001-001-0000'+self.number_w
+            elif len(number)==6:
+                self.number_w = '001-001-000'+self.number_w
+            elif len(number)==7:
+                self.number_w = '001-001-00'+self.number_w
+            elif len(number)==8:
+                self.number_w = '001-001-0'+self.number_w
+            elif len(number)==9:
+                self.number_w = '001-001-'+self.number_w
             else:
-                result['number_w'] = numero
+                self.number_w = numero
         else:
-            result['number_w'] = self.number_w
-        return result
+            self.number_w = self.number_w
 
     @fields.depends('party')
     def on_change_with_party_lang(self, name=None):
@@ -190,13 +214,22 @@ class AccountWithholding(ModelSQL, ModelView):
             context['language'] = self.party.lang.code
         return context
 
+    @fields.depends('taxes', 'total_amount2')
+    def on_change_taxes(self):
+        amount = Decimal(0.0)
+        if self.taxes:
+            for i in self.taxes:
+                amount += i.amount
+            self.total_amount2 = amount * -1
+
     @classmethod
     def get_amount(cls, invoices, names):
         pool = Pool()
         InvoiceTax = pool.get('account.withholding.tax')
         Move = pool.get('account.move')
         MoveLine = pool.get('account.move.line')
-        cursor = Transaction().cursor
+        transaction = Transaction()
+        cursor = transaction.connection.cursor()
 
         untaxed_amount = dict((i.id, _ZERO) for i in invoices)
         tax_amount = dict((i.id, _ZERO) for i in invoices)
@@ -374,15 +407,29 @@ class AccountWithholding(ModelSQL, ModelView):
         else:
             debit = self.total_amount
             credit = Decimal('0.00')
-        move_lines.append({
-            'description': self.number,
-            'debit': debit,
-            'credit': credit,
-            'account': self.account.id,
-            'move': move.id,
-            'journal': self.journal.id,
-            'period': Period.find(self.company.id, date=self.withholding_date),
-            })
+
+        if self.efectivo == True:
+            move_lines.append({
+                'description': self.number,
+                'debit': debit,
+                'credit': credit,
+                'account': self.account.id,
+                'move': move.id,
+                'journal': self.journal.id,
+                'period': Period.find(self.company.id, date=self.withholding_date),
+                })
+        else:
+            move_lines.append({
+                'description': self.number,
+                'debit': debit,
+                'credit': credit,
+                'account': self.party.account_receivable.id,
+                'party': self.party.id,
+                'move': move.id,
+                'journal': self.journal.id,
+                'period': Period.find(self.company.id, date=self.withholding_date),
+                })
+
         if self.taxes:
             for tax in self.taxes:
                 if self.type == 'out_withholding':
@@ -484,8 +531,37 @@ class AccountWithholding(ModelSQL, ModelView):
 
     @classmethod
     @ModelView.button
+    def validate_withholding(cls, withholdings):
+        for withholding in withholdings:
+            if withholding.type == 'out_withholding':
+                if withholding.efectivo == True:
+                    withholding.raise_user_warning('confirm_%s' % withholding.id,
+                           'Esta seguro de realizar la retencion en efectivo.')
+                else:
+                    withholding.raise_user_warning('confirm_%s' % withholding.id,
+                           'Esta seguro que la retencion no es en efectivo')
+            if withholding.type in ('in_withholding'):
+                Invoice = Pool().get('account.invoice')
+                invoices = Invoice.search([('number','=',withholding.reference), ('number','!=', None)])
+                for i in invoices:
+                    invoice = i
+                withholding.set_number()
+                invoice.write([invoice],{ 'ref_withholding': withholding.number})
+            withholding.write([withholding],{'total_amount2':(withholding.total_amount*-1)})
+        cls.write(withholdings, {'state': 'validated'})
+
+    @classmethod
+    @ModelView.button
     def post(cls, withholdings):
         for withholding in withholdings:
+            if withholding.type == 'out_withholding':
+                if withholding.efectivo == True:
+                    withholding.raise_user_warning('confirm_%s' % withholding.id,
+                           'Esta seguro de realizar la retencion en efectivo.')
+                else:
+                    withholding.raise_user_warning('confirm_%s' % withholding.id,
+                           'Esta seguro que la retencion no es en efectivo')
+            withholding.write([withholding],{'total_amount2':(withholding.total_amount*-1)})
             withholding.set_number()
             move_lines = withholding.prepare_withholding_lines()
             withholding.posted(move_lines)
@@ -589,7 +665,6 @@ class AccountWithholdingTax(ModelSQL, ModelView):
     @fields.depends('tax', '_parent_withholding.party', '_parent_withholding.type')
     def on_change_tax(self):
         Tax = Pool().get('account.tax')
-        changes = {}
         if self.tax:
             if self.withholding:
                 context = self.withholding.get_tax_context()
@@ -597,20 +672,19 @@ class AccountWithholdingTax(ModelSQL, ModelView):
                 context = {}
             with Transaction().set_context(**context):
                 tax = Tax(self.tax.id)
-            changes['description'] = tax.description
+            self.description = tax.description
             if self.withholding and self.withholding.type:
                 withholding_type = self.withholding.type
             else:
                 withholding_type = 'out_withholding'
             if withholding_type in ('out_withholding', 'in_withholding'):
-                changes['base_code'] = (tax.invoice_base_code.id
+                self.base_code = (tax.invoice_base_code.id
                     if tax.invoice_base_code else None)
-                changes['base_sign'] = tax.invoice_base_sign
-                changes['tax_code'] = (tax.invoice_tax_code.id
+                self.base_sign = tax.invoice_base_sign
+                self.tax_code = (tax.invoice_tax_code.id
                     if tax.invoice_tax_code else None)
-                changes['tax_sign'] = tax.invoice_tax_sign
-                changes['account'] = tax.invoice_account.id
-        return changes
+                self.tax_sign = tax.invoice_tax_sign
+                self.account = tax.invoice_account.id
 
     @fields.depends('tax', 'base', 'amount', 'manual')
     def on_change_with_amount(self):
