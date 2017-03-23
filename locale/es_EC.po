@@ -132,7 +132,6 @@ msgctxt "field:account.withholding,description:"
 msgid "Description"
 msgstr "Descripción"
 
-#, fuzzy
 msgctxt "field:account.withholding,efectivo:"
 msgid "Efectivo"
 msgstr "Efectivo"
@@ -323,7 +322,7 @@ msgstr "Impuesto IVA ATS"
 
 msgctxt "field:party.party,impuestos_renta:"
 msgid "FUENTE"
-msgstr "Impuesto Renta ATS"
+msgstr "Impuesto Fuente"
 
 msgctxt "help:account.withholding,efectivo:"
 msgid "Retencion en efectivo"
@@ -538,7 +537,7 @@ msgstr ""
 
 msgctxt "odt:account.withholding.print_withholding:"
 msgid "IVA"
-msgstr "Impuesto IVA ATS"
+msgstr ""
 
 msgctxt "odt:account.withholding.print_withholding:"
 msgid "Impuesto"
