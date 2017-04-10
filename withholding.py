@@ -541,18 +541,51 @@ class AccountWithholding(ModelSQL, ModelView):
     @classmethod
     @ModelView.button
     def post(cls, withholdings):
+        pool = Pool()
+        MoveLine = pool.get('account.move.line')
+        Invoice = pool.get('account.invoice')
+        check_payment = False
+        amount = Decimal('0.0')
         for withholding in withholdings:
             if withholding.type == 'out_withholding':
                 if withholding.efectivo == True:
                     withholding.raise_user_warning('confirm_%s' % withholding.id,
                            'Esta seguro de realizar la retencion en efectivo.')
                 else:
+                    check_payment = True
                     withholding.raise_user_warning('confirm_%s' % withholding.id,
                            'Esta seguro que la retencion no es en efectivo')
             withholding.write([withholding],{'total_amount2':(withholding.total_amount*-1)})
             withholding.set_number()
             move_lines = withholding.prepare_withholding_lines()
             withholding.posted(move_lines)
+
+            reconcile_lines = []
+
+            if check_payment == True:
+                move_lines = MoveLine.search([('description', '=', withholding.number_w), ('party', '=', withholding.party), ('reconciliation', '=', None), ('credit', '>', 0)])
+                with_lines = MoveLine.search([('description', '=', withholding.number), ('party', '=', withholding.party), ('reconciliation', '=', None), ('credit', '>', 0)])
+                invoice, = Invoice.search([('type', '=', 'out_invoice'), ('number', '=', withholding.number_w)])
+                if move_lines:
+                    for line_p in move_lines:
+                        amount += line_p.credit
+                        reconcile_lines.append(line_p)
+
+                if with_lines:
+                    for line_w in with_lines:
+                        amount += line_w.credit
+                        reconcile_lines.append(line_w)
+
+                reconcile_line, remainder = \
+                    Invoice.get_reconcile_lines_for_amount(
+                        invoice, amount)
+
+                for reconcile_l in reconcile_line:
+                    reconcile_lines.append(reconcile_l)
+
+                if remainder == Decimal('0.00'):
+                    MoveLine.reconcile(reconcile_lines)
+
         cls.write(withholdings, {'state': 'posted'})
 
 class AccountWithholdingTax(ModelSQL, ModelView):
