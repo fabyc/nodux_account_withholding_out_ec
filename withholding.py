@@ -347,6 +347,7 @@ class AccountWithholding(ModelSQL, ModelView):
         Period = pool.get('account.period')
         Sequence = pool.get('ir.sequence.strict')
         Date = pool.get('ir.date')
+        Withholding = pool.get('account.withholding')
 
         if self.number:
             return
@@ -366,6 +367,9 @@ class AccountWithholding(ModelSQL, ModelView):
         with Transaction().set_context(
                 date=self.withholding_date or Date.today()):
             number = Sequence.get_id(sequence.id)
+            withholding = Withholding.search([('number','=', number)])
+            if withholding:
+                self.raise_user_error('Verifique la secuencia de Retencion, existe una retencion con numero %s', number)
             vals = {'number': number}
             if (not self.withholding_date
                     and self.type in ('out_withholding')):
