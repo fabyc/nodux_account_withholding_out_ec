@@ -537,7 +537,7 @@ msgstr ""
 
 msgctxt "odt:account.withholding.print_withholding:"
 msgid "IVA"
-msgstr ""
+msgstr "IVA"
 
 msgctxt "odt:account.withholding.print_withholding:"
 msgid "Impuesto"
@@ -596,6 +596,10 @@ msgid "ú"
 msgstr ""
 
 msgctxt "selection:account.withholding,state:"
+msgid "Anulled"
+msgstr "Anulada"
+
+msgctxt "selection:account.withholding,state:"
 msgid "Confirm"
 msgstr "Confirmado"
 
@@ -632,8 +636,16 @@ msgid "Withholding Taxes"
 msgstr "Impuestos de la retención"
 
 msgctxt "view:account.withholding:"
+msgid "Anular"
+msgstr ""
+
+msgctxt "view:account.withholding:"
 msgid "Other Info"
 msgstr "Información Adicional"
+
+msgctxt "view:account.withholding:"
+msgid "Total"
+msgstr "Total"
 
 msgctxt "view:account.withholding:"
 msgid "Withholding"

@@ -7,7 +7,7 @@ this repository contains the full copyright notices and license terms. -->
     <field name="reference"/>
     <field name="withholding_date"/>
     <field name="party"/>
-    <field name="total_amount2"/>
+    <field name="total_amount2" sum="Total"/>
     <field name="state"/>
     <field name="description"/>
 </tree>

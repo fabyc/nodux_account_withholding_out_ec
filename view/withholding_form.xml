@@ -56,6 +56,8 @@ this repository contains the full copyright notices and license terms. -->
                           icon="tryton-go-next"/>
                         <button name="post" string="_Post"
                             icon="tryton-ok"/>
+                            <button name="anull_withholding" string="Anular"
+                                icon="tryton-cancel"/>
                     </group>
                 </group>
             </group>

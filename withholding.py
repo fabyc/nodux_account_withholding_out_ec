@@ -66,6 +66,7 @@ class AccountWithholding(ModelSQL, ModelView):
         ('draft', 'Draft'),
         ('validated', 'Confirm'),
         ('posted', 'Posted'),
+        ('annulled', 'Anulled'),
         ], 'State', readonly=True)
 
     withholding_date = fields.Date('Withholding Date',
@@ -151,6 +152,10 @@ class AccountWithholding(ModelSQL, ModelView):
                 'post': {
                     'invisible': (Eval('state') == 'posted') | (Eval('type') == 'in_withholding') ,
                     'readonly' : ~Eval('taxes', [0]),
+                    },
+
+                'anull_withholding': {
+                    'invisible': Eval('state') != 'validated',
                     },
                 })
         cls._order.insert(0, ('withholding_date', 'DESC'))
@@ -591,6 +596,39 @@ class AccountWithholding(ModelSQL, ModelView):
                     MoveLine.reconcile(reconcile_lines)
 
         cls.write(withholdings, {'state': 'posted'})
+
+    @classmethod
+    @ModelView.button
+    def anull_withholding(cls, withholdings):
+        pool = Pool()
+        MoveLine = pool.get('account.move.line')
+        Move = pool.get('account.move')
+        Invoice = pool.get('account.invoice')
+        check_payment = False
+        amount = Decimal('0.0')
+        for withholding in withholdings:
+            if withholding.type == 'out_withholding':
+                self.raise_user_error('No puede anular retencion de Cliente')
+            else:
+                withholding.raise_user_warning('confirm_%s' % withholding.id,
+                   'Esta seguro de anular la retencion %s' % withholding.number)
+                moves = Move.search([('id', '=', withholding.move.id)])
+
+                if moves:
+                    for move in moves:
+                        for line in move.lines:
+                            for tax in withholding.taxes:
+                                if tax.description == line.description:
+                                    cursor = Transaction().cursor
+                                    cursor.execute('DELETE FROM account_move_line WHERE id = %s' %line.id)
+
+                            if line.reconciliation != None:
+                                self.raise_user_error('Factura de Compra ya ha sido pagada')
+                            else:
+                                if (line.account == withholding.party.account_payable) and (line.reconciliation == None):
+                                    line.credit = line.credit + withholding.total_amount2
+                                    line.save()
+        cls.write(withholdings, {'state': 'annulled'})
 
 class AccountWithholdingTax(ModelSQL, ModelView):
     'Account Withholding Tax'
